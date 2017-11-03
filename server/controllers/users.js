@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var BucketList = mongoose.model('BucketList');
 
-module.export = {
+module.exports = {
 
   showAll: function (req, res) {
     User.find({}, function(err, users){

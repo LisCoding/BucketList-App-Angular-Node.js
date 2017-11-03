@@ -13,11 +13,11 @@ module.exports = function(app) {
 
   //create users
   app.post('/users', function (req, res){
-    console.log("POST Request")
+    console.log("POST Request: We are here")
     users.createUser(req,res)
   });
 
-  //***create BucketList**** belongs to User 
+  //***create BucketList**** belongs to User
   app.post("/users/:id", function(req, res){
     console.log("Post create a new list")
     users.createBucketList(req, res)

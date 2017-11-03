@@ -1,3 +1,20 @@
-<p>
-  dashboard works!
-</p>
+
+<div class="header">
+  <ul>
+    <li><a href="#">Bucket List </a></li>
+    <li><a href="#">Home </a></li>
+    <li><a href="#">LogOut </a></li>
+  </ul>
+  <hr>
+</div>
+<h2>Welcome, {{currentUser}}!</h2>
+<!-- <app-create (createNewBucketListEvent)="createNewBucketListChild($event)" [bucketLists]="bucketLists"> </app-create>
+
+<h5>Before I die I want to ....</h5>
+<div class="done" *ngFor="let item of bucketLists">
+  <input type="checkbox" class="checkBox" name="done" [disabled] = "item.author != currentUser" >
+  <label>{{item.author}}: {{item.title}} -- {{item.description}}--{{item.createdAt | date:'medium'}}</label>
+
+</div>
+<h5>List of Users(Click to view Profile)</h5>
+<a class="users"  [routerLink]="['/show/', item._id]" *ngFor="let item of bucketLists">{{item.author}}</a> -->

@@ -1,0 +1,11 @@
+li {
+ display: inline;
+ margin-right : 20px;
+ padding: 70px;
+}
+.done {
+ width: 570px
+}
+.users {
+ display: block;
+}

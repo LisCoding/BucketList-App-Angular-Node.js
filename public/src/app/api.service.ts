@@ -16,12 +16,12 @@ export class ApiService {
     createUser(user: User) {
       return this._http.post("/users", user )
       .map(data => data.json()) // converting to json
-      .toPromise() // making a promise that will get something
+      .toPromise() // making a promise that will get something if does not we can pass something a message!
     }
 
     //create BucketList
-
     createBucketList(bucketList: BucketList){
+      console.log("Are u even here?")
       return this._http.post("/users/" + this.userLoginID, bucketList )
       .map(data => data.json()) // converting to json
       .toPromise() // making a promise that will get something
@@ -32,6 +32,13 @@ export class ApiService {
   //get all the users
     getusers(){
       return this._http.get("/users")
+      .map(data => data.json()) // converting to json
+      .toPromise() // making a promise that will get something
+    }
+
+    //get all the bucketLists of the user that is login
+    getBucketLists(){
+      return this._http.get("/users/" + this.userLoginID)
       .map(data => data.json()) // converting to json
       .toPromise() // making a promise that will get something
     }

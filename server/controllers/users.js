@@ -18,31 +18,40 @@ module.exports = {
   //create a new user
   createUser: function(req, res){
     delete req.body._id
-    User.create(req.body, function(err, user){
-      if(err){
-        console.log("we can't create a user", err.errors);
-      }else {
-        console.log("We succefully created a USer");
-        return res.json(user)
+
+    User.findOne({name: req.body.name}, function(err, user){
+      if(user){
+        console.log("we already have this userSSS", user)
+        return res.json(user);
+      } else {
+        User.create(req.body, function(err, user){
+          if(err){
+            console.log("we can't create a user", err.errors);
+          }else {
+            console.log("We succefully created a USer", user);
+            return res.json(user)
+          }
+        })
       }
     })
+
   },
   //create a BList that belongs to User
   createBucketList: function(req, res){
-    // delete req.body._id
+    delete req.body._id
     User.findOne({_id: req.params.id}, function(err, user){
-      var bucketList = new BucketList(req.body);
-      bucketList._user = user._id;
-      user.bucketList.push(bucketList);
-      bucketList.save(function(err){
+      var bucketLists = new BucketList(req.body);
+      bucketLists._user = user._id;
+       user.bucketLists.push(bucketLists);
+      bucketLists.save(function(err){
         if(err){
           console.log("something went wrong saving list")
         }
         user.save(function(err){
-          if(error){
+          if(err){
             console.log("something went wrong", error );
           }else {
-            console.log("We succefully created a USer");
+            console.log("We succefully created a List");
             return res.json(user)
           }
         })

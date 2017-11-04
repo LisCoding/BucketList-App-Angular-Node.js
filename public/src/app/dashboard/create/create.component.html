@@ -1,3 +1,21 @@
-<p>
-  create works!
-</p>
+
+
+<form (submit)="createNewBucketList()">
+  <input
+  type="text"
+  name="title"
+  placeholder="Title"
+  minlength="5"
+   required
+  [(ngModel)]="newBucketList.title">
+  <input type="text"
+   name="description"
+   placeholder= "Description"
+   minlength="10"
+   required
+   [(ngModel)]="newBucketList.description">
+  <select>
+    <option *ngFor="let user of users" value="{{user.name}}">{{user.name}}</option>
+  </select>
+  <button type="submit">Add to List</button>
+</form>

@@ -10,10 +10,17 @@ module.exports = function(app) {
     users.showAll(req,res)
   });
 
+  //get all the bucketLists of a particular user
+
+  // app.get('/users/:id', function(req,res) {
+  //   console.log("GET request")
+  //   users.showAll(req,res)
+  // });
+
 
   //create users
   app.post('/users', function (req, res){
-    console.log("POST Request: We are here")
+    console.log("POST Request: We are here to create a user")
     users.createUser(req,res)
   });
 

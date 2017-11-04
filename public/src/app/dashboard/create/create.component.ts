@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ApiService } from './../../api.service';
+import { User } from "./../../user";
+import { BucketList } from "./../../bucket-list";
 
 @Component({
   selector: 'app-create',
@@ -6,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
+  @Input() users;
+  @Output() createNewBucketListEvent = new EventEmitter()
 
-  constructor() { }
+  newBucketList = new BucketList();
+  constructor(private _apiService: ApiService) { }
 
   ngOnInit() {
+  }
+
+  createNewBucketList(){
+    console.log("I was clicked!!!")
+    this.createNewBucketListEvent.emit(this.newBucketList);
+    this.newBucketList = new BucketList();
   }
 
 }

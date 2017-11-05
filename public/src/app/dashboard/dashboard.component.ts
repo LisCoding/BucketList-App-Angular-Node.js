@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  //create a new bucketList and save in the dataBase
+  //create a new bucketList and save in the dataBase getting info from the child component 
 createNewBucketListChild(bucketList: BucketList){
   bucketList.author = this._apiService.currentUser
   console.log("this coming", bucketList)

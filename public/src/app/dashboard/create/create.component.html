@@ -14,8 +14,8 @@
    minlength="10"
    required
    [(ngModel)]="newBucketList.description">
-  <select>
-    <option *ngFor="let user of users" value="{{user.name}}">{{user.name}}</option>
+  <select name = "tagName"[(ngModel)]="newBucketList.tagName">
+    <option *ngFor="let user of users" [ngValue]="user.name">{{user.name}}</option>
   </select>
   <button type="submit">Add to List</button>
 </form>

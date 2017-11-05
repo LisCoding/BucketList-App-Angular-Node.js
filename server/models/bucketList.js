@@ -7,7 +7,8 @@ var BucketListSchema = new mongoose.Schema({
  _user: {type: Schema.Types.ObjectId, ref: 'user'},
  title: { type: String, required: true, minlength: 5},
  description: { type: String, required: true, minlength: 10},
- author: {type: String, required: true, minlength: 3}, 
+ author: {type: String, required: true, minlength: 3},
+ tagName: {type: String}, 
  done: { type: Boolean }
 },{timestamps: true });
 

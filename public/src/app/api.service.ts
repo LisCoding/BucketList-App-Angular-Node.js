@@ -27,6 +27,14 @@ export class ApiService {
       .toPromise() // making a promise that will get something
     }
 
+    //create BucketList for a tag friend
+    createBucketListForTaggedPerson(bucketList: BucketList){
+      console.log("service tagged person")
+      return this._http.post("/friend/" + bucketList.tagName, bucketList )
+      .map(data => data.json()) // converting to json
+      .toPromise() // making a promise that will get something
+    }
+
 
 
   //get all the users
@@ -38,8 +46,23 @@ export class ApiService {
 
     //get all the bucketLists of the user that is login
     getBucketLists(){
-      return this._http.get("/users/" + this.userLoginID)
-      .map(data => data.json()) // converting to json
+      console.log("we are inside API going to make a HTTP request")
+      return this._http.get("/bucketLists/" + this.userLoginID)
+      .map(data => {
+        console.log("this is data return from backend", data)
+        return data.json()
+      }) // this is the response we got from controllers converting to json
+      .toPromise() // making a promise that will get something
+    }
+
+    //get all the bucketLists of the user that is login
+    getBucketListsUser(userID){
+      console.log("we are inside API going to make a HTTP request")
+      return this._http.get("/bucketLists/" + userID)
+      .map(data => {
+        console.log("this is data return from backend", data)
+        return data.json()
+      }) // this is the response we got from controllers converting to json
       .toPromise() // making a promise that will get something
     }
 
@@ -52,8 +75,8 @@ export class ApiService {
 
 
   //update user
-    update(user: User) {
-      return this._http.put("/users/" + user._id, user)
+    update(itemList: BucketList) {
+      return this._http.put("/bucketLists/" + itemList._id, itemList)
       .map(data => data.json()) // converting to json
       .toPromise() // making a promise that will get something
     }

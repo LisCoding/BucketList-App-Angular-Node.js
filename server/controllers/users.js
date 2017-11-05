@@ -9,7 +9,7 @@ module.exports = {
       if(err){
         console.log("did not get dat", err);
       } else {
-        console.log("We got data");
+        console.log("We got data ####");
         return res.json(users);
       }
     })
@@ -57,8 +57,34 @@ module.exports = {
         })
       })
     })
-
   },
+
+  //create a BList that belongs to taggedPerson
+  createBucketListForTaggedPerson: function(req, res){
+    console.log("we are inside controllers tagged person")
+    delete req.body._id
+    User.findOne({name: req.params.name}, function(err, user){
+      console.log("this is wagr we sounf", user)
+      var bucketLists = new BucketList(req.body);
+      bucketLists._user = user._id;
+       user.bucketLists.push(bucketLists);
+      bucketLists.save(function(err){
+        if(err){
+          console.log("something went wrong saving list")
+        }
+        user.save(function(err){
+          if(err){
+            console.log("something went wrong", error );
+          }else {
+            console.log("We succefully created a List");
+            return res.json(user)
+          }
+        })
+      })
+    })
+  },
+
+
 
   showUser: function(req, res){
     User.findOne({_id: req.params.id}, function (err, user) {
@@ -69,6 +95,19 @@ module.exports = {
       }
     })
   },
+
+    //show bucket-list of a specific User
+    showBucketList: function(req, res){
+      console.log("we are in inside the controller showBucketList")
+      BucketList.find({_user: req.params.id}, function (err, bucketList) {
+        if(err){
+          console.log("something went wrong can not get bucketList", err);
+        }else {
+          console.log("we are sending response" )
+          return res.json(bucketList)
+        }
+      })
+    },
 
   //delete Users!!
   deleteUser: function(req, res){
@@ -81,10 +120,10 @@ module.exports = {
     })
   },
 
-  updateUser: function (req, res) {
-    User.update({_id: req.params.id}, req.body, function(err, user){
+  updateBucketList: function (req, res) {
+    BucketList.update({_id: req.params.id}, req.body, function(err, itemList){
       if(err){
-        console.log("We cant not Update something went wrong!");
+        console.log("We cant not Update BucketList something went wrong!");
       }else {
         return res.json(true)
       }

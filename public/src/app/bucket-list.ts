@@ -4,6 +4,7 @@ export class BucketList {
   public _user: Object = {},
   public title: string = "",
   public description: string = "",
+  public tagName: string = "",
   public author: string = "",
   public done: boolean = false,
   public createdAt: Date = new Date(),

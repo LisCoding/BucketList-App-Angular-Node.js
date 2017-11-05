@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   currentUser = "";
   userLoginID = "";
   newBucketList = new BucketList()
-  bucketList: Array<BucketList> = [];
+  bucketLists: Array<BucketList> = [];
   users: Array<User> = [];
 
   constructor( private _apiService: ApiService, private _router: Router) { }
@@ -30,11 +30,17 @@ export class DashboardComponent implements OnInit {
   //create a new bucketList and save in the dataBase
 createNewBucketListChild(bucketList: BucketList){
   bucketList.author = this._apiService.currentUser
+  console.log("this coming", bucketList)
+  if(bucketList.tagName){
+    console.log("we tag a person")
+    //we need to create a bucket list for the person tagged
+    this.tagFriend(bucketList)
+  }
+
   this._apiService.createBucketList(bucketList)
-  .then(status => this.newBucketList) // response from the back end -redefining the user array ojbects
+  .then(status => this.getBucketLists()) // response from the back end -redefining the user array ojbects
   .catch(err=> console.log("something went wrong creating the bucketList!", err))
-  this.bucketList.push(bucketList);
-    console.log("$$$$$$$$$$",this.bucketList)
+  this.bucketLists.push(this.newBucketList)
 
 }
 
@@ -44,8 +50,28 @@ getUsers(){
   .catch(err=> console.log("something went wrong when we were getting teh users!", err))
 }
 getBucketLists(){
-  
-
+  console.log("we are going to make a API call inside getBucketLists")
+  this._apiService.getBucketLists()
+  .then(bucketList => {
+    this.bucketLists = bucketList,
+  console.log("this is we got in the bucketList", bucketList)}) // redefining the bucketList array ojbects
+  .catch(err=> console.log("something went wrong when we were getting teh bucketLists!", err))
 }
+
+tagFriend(bucketList: BucketList){
+  console.log("we making a call for tagged person")
+  this._apiService.createBucketListForTaggedPerson(bucketList)
+  .then(status => true) // response from the back end -redefining the user array ojbects
+  .catch(err=> console.log("something went wrong creating the bucketList for the tagged person!", err))
+}
+
+update(itemList){
+  console.log("I was clicked for update", itemList)
+  itemList.done = true
+  this._apiService.update(itemList)
+  .then(status => this.getBucketLists()) // response from the back end -redefining the user array ojbects
+  .catch(err=> console.log("something went wrong updating the bucketList!", err))
+}
+
 
 }

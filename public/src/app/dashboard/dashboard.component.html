@@ -11,10 +11,11 @@
 <app-create [users]="users" (createNewBucketListEvent)= "createNewBucketListChild($event)"> </app-create>
 
 <h5>Before I die I want to ....</h5>
-<div class="done" *ngFor="let item of bucketList">
-  <input type="checkbox" class="checkBox" name="done" [disabled] = "item.author != currentUser" >
+<div class="done" *ngFor="let item of bucketLists">
+  <input (click)="update(item)" type="checkbox" class="checkBox" name="done" [checked]="item.done == true ">
   <label>{{item.author}}: {{item.title}} -- {{item.description}}--{{item.createdAt | date:'medium'}}</label>
 
 </div>
 <h5>List of Users(Click to view Profile)</h5>
+
 <a class="users"  [routerLink]="['/show/', user._id]" *ngFor="let user of users">{{user.name}}</a>

@@ -1,3 +1,22 @@
-<p>
-  show-list works!
-</p>
+<div class="header">
+  <ul>
+    <li><a>Bucket List </a></li>
+    <li><a [routerLink]="['/dashboard']">Home </a></li>
+    <li><a [routerLink]="['']">LogOut </a></li>
+  </ul>
+  <hr>
+</div>
+
+<h5>Done</h5>
+<div class="done" *ngFor="let item of bucketListDone">
+  <input type="checkbox" class="checkBox" name="done" [disabled] = "item.author != currentUser" [checked]="item.done == true" >
+  <label>{{item.author}}: {{item.title}} -- {{item.description}}--{{item.createdAt | date:'medium'}}</label>
+
+</div>
+
+<h5>Pending</h5>
+<div class="done" *ngFor="let item of bucketListPending">
+  <input type="checkbox" class="checkBox" name="done" [disabled] = "item.author != currentUser"  >
+  <label>{{item.author}}: {{item.title}} -- {{item.description}}--{{item.createdAt | date:'medium'}}</label>
+
+</div>

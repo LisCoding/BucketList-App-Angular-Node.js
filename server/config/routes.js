@@ -30,10 +30,22 @@ module.exports = function(app) {
     users.createBucketList(req, res)
   });
 
+  //***create BucketList**** belongs to tagged person
+  app.post("/friend/:name", function(req, res){
+    console.log("Post create a new list for tagged person")
+    users.createBucketListForTaggedPerson(req, res)
+  });
+
   // show one specific user info
   app.get('/users/:id', function(req, res) {
     console.log("im in the routes", req.params.id)
     users.showUser(req, res)
+  });
+
+  // show bucketLists for one specific  user
+  app.get('/bucketLists/:id', function(req, res) {
+    console.log("im in the bucket List routes", req.params.id)
+    users.showBucketList(req, res)
   });
 
   //Delete a User
@@ -42,10 +54,10 @@ module.exports = function(app) {
     users.deleteUser(req, res)
   });
 
-  //Update a user!!!
-  app.put('/users/:id', function(req, res) {
-    console.log(" from routes ID", req.params.id);
-    users.updateUser(req, res)
+  //Update a BucketList!!!
+  app.put('/bucketLists/:id', function(req, res) {
+    console.log(" from  PUT routes ID", req.params.id);
+    users.updateBucketList(req, res)
   });
 
 
